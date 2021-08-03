@@ -13,3 +13,8 @@ git clone https://github.com/orbitdb/orbit-db-control-center.git
 cd orbit-db-control-center/
 npm i && npm start
 ```
+
+Run from `docker-compose.yml`
+```shell
+docker-compose up -d
+```
