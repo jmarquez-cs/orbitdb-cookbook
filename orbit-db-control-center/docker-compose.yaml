@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  control-center:
+    image: orbitdb/control-center:0.0.2           # https://github.com/orbitdb/orbit-db-control-center/blob/main/src/database/index.js
+    container_name: control-center
+    networks:
+      default:
+    ports: ['80:80']
+    restart: unless-stopped
+    volumes: 
+      - control-center:/home
+
+networks:
+  default:
+
+volumes:
+  control-center:
