@@ -1,0 +1,37 @@
+{
+	"repo": "",
+	"repoAutoMigrate": true,
+	"init": {
+		"emptyRepo": false,
+		"algorithm": "rsa",
+		"bits": 2048,
+		"privateKey": ""
+	},
+	"start": true,
+	"pass": null,
+	"silent": false,
+	"relay": {
+		"enabled": true,
+		"hop": {
+			"enabled": false,
+			"active": false
+		}
+	},
+	"offline": false,
+	"preload": {
+		"enabled": true,
+		"addresses": [
+			"/dns4/peer1.ipfsprivi.com/tcp/4001/ipfs/12D3KooWL8M9mcMyhat5jWx2SKrun34Jm7FtNfqEao6JenrJLguo",
+			"/dns4/peer2.ipfsprivi.com/tcp/4002/ipfs/12D3KooWPZCFnEwEBHr4MvXEGS2PcGSy89J17JVuPH1ruKDUutLv",
+			"/dns4/peer3.ipfsprivi.com/tcp/4003/ipfs/12D3KooWPzzuBtqAbca6XwC3DquqHBKLMkUox37aTNicSF6PpLSm",
+			"/dns4/peer4.ipfsprivi.com/tcp/4001/ipfs/12D3KooWMhpvPTERUivrdPhmUDFSiXLRCBmw1z8XAgYBjgwJgdNz",
+			"/dns4/peer5.ipfsprivi.com/tcp/4001/ipfs/12D3KooWRJFPELScQeUYQ4jogBDAb8pWcnm4Nk3pTamynoHVE2TK",
+			"/dns4/peer6.ipfsprivi.com/tcp/4001/ipfs/12D3KooWGBrN664m2j6tkofhrDWvWVuHD6265aQ3iX72firZ5eYY"
+		]
+	},
+	"EXPERIMENTAL": {
+		"ipnsPubsub": true,
+		"sharding": false
+	},
+	"config": ""
+}

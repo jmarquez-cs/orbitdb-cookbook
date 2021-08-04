@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  orbit-db-http-api:
+    command: bash -c 'node src/cli.js api --no-https'
+    image: orbitdb/orbit-db-http-api:1151
+    init: TRUE
+    container_name: orbit-db-http-api
+    environment:
+      - API_PORT=3000
+      # - HTTPS_CERT=${HOME}/some.crt
+      # - HTTPS_KEY=${HOME}/some.key
+      - IPFS_CONF=${HOME}/.jsipfs/config
+      - IPFS_HOST=localhost
+      - IPFS_PORT=5002
+      # - ORBITDB_CONF=${HOME}/orbitdb.conf
+      # - ORBITDB_DIR=${PWD}/orbitdb/QmSi6yDHjDYHCeQpYA7P6KgVUTqtSd84bwEG8XmhzuaH4e
+    networks:
+      default:
+    restart: unless-stopped
+    volumes:
+      - orbit-db-http-api:/root
+networks:
+  default:
+
+volumes:
+  orbit-db-http-api:

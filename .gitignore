@@ -598,7 +598,6 @@ blockchain/history
 
 #truffle
 yarn.lock
-package-lock.json
 
 ### SSH ###
 **/.ssh/id_*
@@ -1403,5 +1402,7 @@ FodyWeavers.xsd
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
+ipfs
 .ipfs**
-orbitdb**
+orbitdb
+**swarm.key**
