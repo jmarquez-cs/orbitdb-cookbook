@@ -1,27 +1,7 @@
 
 # [Envoy Proxy](http://envoyproxy.io)
 
-
-### Option 1: MacOS Steps for SSL/TLS using [Certbot](https://certbot.eff.org/lets-encrypt/osx-haproxy)
-
-1. Open terminal and install certbot using the following command:
-```shell
-$ brew install certbot
-```
    
-2. Next, Certbot will temporarily spin up a webserver on your machine.Spins up a daemon using the following command:
-```shell
-$ sudo certbot certonly --standalone
-```
-
-3. Set up automatic renewal with a cron job to `/etc/crontab`
-```shell
-echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
-```
-   
-- Test automatic renewal set up with the following command:
-```shell
-sudo certbot renew --dry-run
 ```
 
 ### Envoy Proxy may or may not be complimented with [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/envoy-introduction/)
