@@ -1,25 +1,54 @@
-version: '3'
+version: '3.7'
 
 services:
+
   orbit-db-http-api:
-    command: bash -c 'node src/cli.js api --no-https'
+    command: bash -c 'node src/cli.js api --orbitdb-dir ./orbitdb --https-key /etc/localhost+4-key.pem --https-cert /etc/localhost+4.pem'
     image: orbitdb/orbit-db-http-api:1151
     init: TRUE
     container_name: orbit-db-http-api
     environment:
       - API_PORT=3000
-      # - HTTPS_CERT=${HOME}/some.crt
-      # - HTTPS_KEY=${HOME}/some.key
-      - IPFS_CONF=${HOME}/.jsipfs/config
-      - IPFS_HOST=localhost
-      - IPFS_PORT=5002
-      # - ORBITDB_CONF=${HOME}/orbitdb.conf
-      # - ORBITDB_DIR=${PWD}/orbitdb/QmSi6yDHjDYHCeQpYA7P6KgVUTqtSd84bwEG8XmhzuaH4e
-    networks:
-      default:
+      - HTTPS_CERT=../certs/localhost+4.pem:/etc/localhost+4.pem
+      - HTTPS_KEY=../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
+      - IPFS_CONF=${HOME}/.ipfs/config        # https://github.com/ipfs/ipfs-desktop#how-does-ipfs-desktop-select-the-ipfs-repo-location
+      - IPFS_HOST=host.docker.internal        # https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds
+      - IPFS_PORT=5001
+      # - ORBITDB_CONF=${PWD}/orbitdb.conf
+      - ORBITDB_DIR=${PWD}/../orbitdb
+    # expose: ['3000']
+    networks: ['default']
+    ports: ['3000:3000']
     restart: unless-stopped
     volumes:
       - orbit-db-http-api:/root
+      - ../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
+      - ../certs/localhost+4.pem:/etc/localhost+4.pem
+
+  envoy-front-proxy:
+    image: envoyproxy/envoy:v1.14.1           # https://www.envoyproxy.io/docs/envoy/v1.14.1/api-v2/api/v2/listener/listener_components.proto#envoy-api-file-envoy-api-v2-listener-listener-components-proto
+    container_name: envoy-front-proxy
+    expose: ['9901','80', '443']
+    ports: ['9901:9901','80:80', '443:443']
+    depends_on: ['orbit-db-http-api']
+    networks: ['default']
+    volumes:
+      - ../envoy/front-proxy/envoy.yaml:/etc/envoy/envoy.yaml
+      - ../certs/localhost+4.pem:/etc/localhost+4.pem
+      - ../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
+
+  envoy-sidecar-a:
+    image: envoyproxy/envoy:v1.14.1
+    container_name: envoy-orbit-db-api
+    expose: ['8786']
+    ports: ['8786:8786']
+    depends_on: ['orbit-db-http-api']
+    networks: ['default']
+    volumes:
+      - ../envoy/sidecar-a/envoy.yaml:/etc/envoy/envoy.yaml
+      - ../certs/localhost+4.pem:/etc/localhost+4.pem
+      - ../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
+
 networks:
   default:
 
