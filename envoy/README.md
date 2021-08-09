@@ -1,8 +1,6 @@
 
 # [Envoy Proxy](http://envoyproxy.io)
 
-   
-```
 
 ### Envoy Proxy may or may not be complimented with [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/envoy-introduction/)
 
