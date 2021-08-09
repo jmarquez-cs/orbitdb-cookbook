@@ -19,6 +19,8 @@ echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random
 ```shell
 sudo certbot renew --dry-run
 ```
+
+4. Move cert and key to this path `orbitdb-cookbook/certs`
    
 ### Option 2: [mkcert](https://github.com/FiloSottile/mkcert#installation) (recommended for development only)
    
