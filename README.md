@@ -1,4 +1,4 @@
-👨‍🍳 An OrbitDB cookbook of all sorts 👨‍🍳
+# 👨‍🍳 An OrbitDB cookbook of all sorts 👨‍🍳
 
 #### Option 1
 - Requires [IPFS installed](https://docs.ipfs.io/install/)
