@@ -1,13 +1,13 @@
-### Option 1: MacOS Steps for SSL/TLS using [Certbot](https://certbot.eff.org/lets-encrypt/osx-haproxy)
+### Option 1: [Certbot](https://certbot.eff.org/lets-encrypt/osx-haproxy)
 
 1. Open terminal and install certbot using the following command:
 ```shell
-$ brew install certbot
+brew install certbot
 ```
    
 2. Next, Certbot will temporarily spin up a webserver on your machine.Spins up a daemon using the following command:
 ```shell
-$ sudo certbot certonly --standalone
+sudo certbot certonly --standalone
 ```
 
 3. Set up automatic renewal with a cron job to `/etc/crontab`
@@ -20,8 +20,7 @@ echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random
 sudo certbot renew --dry-run
 ```
    
-
-Option 2: [mkcert](https://github.com/FiloSottile/mkcert#installation)   
+### Option 2: [mkcert](https://github.com/FiloSottile/mkcert#installation) (recommended for development only)
    
 1. Install mkcert [pre-built binaries](https://github.com/FiloSottile/mkcert/releases) or commands:
 ```shell
@@ -34,7 +33,7 @@ brew install nss    # If using Firefox
 cd $PWD/../certs
 mkcert localhost "*.localhost" localhost 120.0.0.1 ::1
 ```
-results: 
+- results: 
 ```console
 Note: the local CA is not installed in the system trust store.
 Run "mkcert -install" for certificates to be trusted automatically ⚠️
