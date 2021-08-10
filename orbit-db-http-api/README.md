@@ -1,5 +1,5 @@
 
-### This demonstration requires SSL/TLS localhost (development purposes only): [mkcert](https://github.com/FiloSottile/mkcert#installation)   
+### This demonstration requires SSL/TLS localhost using [mkcert](https://github.com/FiloSottile/mkcert#installation)(development purposes only) 
    
 1. Install mkcert [pre-built binaries](https://github.com/FiloSottile/mkcert/releases) or commands:
 ```shell
