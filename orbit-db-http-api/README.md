@@ -10,7 +10,7 @@ brew install nss    # If using Firefox
 2. Run `mkcert` in the `/certs` directory:
 ```shell
 cd $PWD/../certs
-mkcert localhost "*.localhost" localhost 120.0.0.1 ::1
+mkcert localhost "*.localhost" localhost 127.0.0.1 ::1
 ```
 results: 
 ```console
@@ -22,7 +22,7 @@ Created a new certificate valid for the following names 📜
  - "*.localhost"
    Warning: many browsers don't support second-level wildcards like "*.localhost" ⚠️
  - "localhost"
- - "120.0.0.1"
+ - "127.0.0.1"
  - "::1"
 
 Reminder: X.509 wildcards only go one level deep, so this won't match a.b.localhost ℹ️

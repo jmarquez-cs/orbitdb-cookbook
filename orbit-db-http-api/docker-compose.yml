@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     volumes:
       - orbit-db-http-api:/root
-      - ../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
+      - ../certs/fullchain.pem:/etc/localhost+4-key.pem
       - ../certs/localhost+4.pem:/etc/localhost+4.pem
 
   envoy-front-proxy:
@@ -34,7 +34,7 @@ services:
     networks: ['default']
     volumes:
       - ../envoy/front-proxy/envoy.yaml:/etc/envoy/envoy.yaml
-      - ../certs/localhost+4.pem:/etc/localhost+4.pem
+      - ../certs/fullchain.pem:/etc/localhost+4.pem
       - ../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
 
   envoy-sidecar-a:
@@ -46,7 +46,7 @@ services:
     networks: ['default']
     volumes:
       - ../envoy/sidecar-a/envoy.yaml:/etc/envoy/envoy.yaml
-      - ../certs/localhost+4.pem:/etc/localhost+4.pem
+      - ../certs/fullchain.pem:/etc/localhost+4.pem
       - ../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
 
 networks:
