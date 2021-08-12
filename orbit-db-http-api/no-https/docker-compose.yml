@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+
+  orbit-db-http-api:
+    command: bash -c 'node src/cli.js api --http1 --no-https --orbitdb-dir ./orbitdb'
+    image: orbitdb/orbit-db-http-api:1151
+    init: TRUE
+    container_name: orbit-db-http-api
+    environment:
+      - API_PORT=3000
+      - IPFS_CONF=${HOME}/.ipfs/config        
+      - IPFS_HOST=host.docker.internal      
+      - IPFS_PORT=5001
+      - ORBITDB_DIR=${PWD}/../orbitdb
+    networks: ['default']
+    ports: ['3000:3000']
+    restart: unless-stopped
+    volumes:
+      - orbit-db-http-api:/root
+
+networks:
+  default:
+
+volumes:
+  orbit-db-http-api:
