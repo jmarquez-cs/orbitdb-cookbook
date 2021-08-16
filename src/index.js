@@ -1,5 +1,5 @@
 const IPFS = require('ipfs-core')
-const Options = require('./ipfs-options.json')
+const Options = require('../ipfs-options.json')
 const OrbitDB = require('orbit-db')
 const fs = require('fs')
 

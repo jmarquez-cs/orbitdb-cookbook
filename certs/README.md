@@ -40,9 +40,9 @@ sudo cp rootCA-key.pem ~/path/to/this/orbit/certs/rootCA-key.pem
 sudo cp rootCA.pem ~/path/to/this/orbit/certs/rootCA.pem
 cat localhost+4.pem rootCA.pem localhost+4-key.pem > fullchain.pem
 ```
-
+   
 ### Option 2: [Certbot](https://certbot.eff.org/lets-encrypt/osx-haproxy)
-
+   
 1. Open terminal and install certbot using the following command:
 ```shell
 brew install certbot
@@ -52,7 +52,7 @@ brew install certbot
 ```shell
 sudo certbot certonly --standalone
 ```
-
+   
 3. Set up automatic renewal with a cron job to `/etc/crontab`
 ```shell
 echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
@@ -62,5 +62,5 @@ echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random
 ```shell
 sudo certbot renew --dry-run
 ```
-
+   
 4. Move cert and key to this path `orbitdb-cookbook/certs`
