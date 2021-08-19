@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+
+  # orbit-db-http-api:
+  #   command: ["node", "src/cli.js", "api", "--ipfs-host=192.168.3.1 --ipfs-conf=/root/jsipfs/config --https-key /etc/localhost+4-key.pem --https-cert /etc/localhost+4.pem"]
+  #   container_name: orbit-db-http-api
+  #   depends_on: ['envoy-sidecar-a']
+  #   environment:
+  #     HTTPS_CERT: '/etc/localhost+4.pem'
+  #     HTTPS_KEY: '/etc/localhost+4-key.pem'
+  #     IPFS_CONF: 'config'                     # https://github.com/ipfs/ipfs-desktop#how-does-ipfs-desktop-select-the-ipfs-repo-location
+  #     IPFS_HOST: 'envoy-front-proxy'         # https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds
+  #     IPFS_PORT: '80'
+  #     ORBITDB_DIR: '/orbitdb'
+  #   image: orbitdb/orbit-db-http-api:1151
+  #   init: TRUE
+  #   networks: ['default']
+  #   ports: ['3000:3000']
+  #   # restart: unless-stopped
+  #   volumes:
+  #     - orbit-db-http-api:/root
+  #     - ${HOME}/.jsipfs/config:/root/.jsipfs/config
+  #     - ../../certs/fullchain.pem:/etc/localhost+4-key.pem
+  #     - ../../certs/localhost+4.pem:/etc/localhost+4.pem
+
+  envoy-front-proxy:
+    image: envoyproxy/envoy:v1.14.1           # https://www.envoyproxy.io/docs/envoy/v1.14.1/api-v2/api/v2/listener/listener_components.proto#envoy-api-file-envoy-api-v2-listener-listener-components-proto
+    container_name: envoy-front-proxy
+    expose: ['9901','80', '443']
+    ports: ['9901:9901','80:80', '443:443']
+    networks: ['default']
+    volumes:
+      - ../../envoy/front-proxy/envoy.yaml:/etc/envoy/envoy.yaml
+      - ../../certs/fullchain.pem:/etc/localhost+4.pem
+      - ../../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
+
+  envoy-sidecar-a:
+    image: envoyproxy/envoy:v1.14.1
+    container_name: envoy-sidecar-a
+    expose: ['8786']
+    ports: ['8786:8786']
+    networks: ['default']
+    volumes:
+      - ../../envoy/sidecar-a/envoy.yaml:/etc/envoy/envoy.yaml
+      - ../../certs/fullchain.pem:/etc/localhost+4.pem
+      - ../../certs/localhost+4-key.pem:/etc/localhost+4-key.pem
+
+networks:
+  default:
+
+volumes:
+  orbit-db-http-api:

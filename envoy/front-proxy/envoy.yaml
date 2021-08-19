@@ -59,7 +59,7 @@ static_resources:
                   prefix: "/"
                 route:
                   cluster: envoy-sidecar-a
-                  timeout: 180s
+                  # timeout: 180s
           http_filters:
           - name: envoy.router
             typed_config: {}

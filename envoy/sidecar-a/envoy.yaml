@@ -52,4 +52,4 @@ static_resources:
             address:
               socket_address:
                 address: cluster-app-for-sidecar-a
-                port_value: 3000
+                port_value: 5002
